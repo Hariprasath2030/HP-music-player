@@ -1,12 +1,8 @@
-import { auth } from '@clerk/nextjs/server'
 import { UserButton } from '@clerk/nextjs'
 import Link from 'next/link'
 import { Music, Play, Users, Headphones } from 'lucide-react'
 
-export default async function Home() {
-  const { userId } = await auth()
-  const isSignedIn = !!userId
-
+export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900">
       {/* Navigation */}
@@ -16,23 +12,15 @@ export default async function Home() {
           <span className="text-2xl font-bold text-white">HP Music</span>
         </div>
         <div className="flex items-center space-x-4">
-          {!isSignedIn ? (
-            <>
-              <Link href="/sign-in" className="text-white hover:text-purple-300 transition-colors">
-                Sign In
-              </Link>
-              <Link href="/sign-up" className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg transition-colors">
-                Sign Up
-              </Link>
-            </>
-          ) : (
-            <>
-              <Link href="/dashboard" className="text-white hover:text-purple-300 transition-colors">
-                Dashboard
-              </Link>
-              <UserButton afterSignOutUrl="/" />
-            </>
-          )}
+          <Link href="/sign-in" className="text-white hover:text-purple-300 transition-colors">
+            Sign In
+          </Link>
+          <Link href="/sign-up" className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg transition-colors">
+            Sign Up
+          </Link>
+          <Link href="/dashboard" className="text-white hover:text-purple-300 transition-colors">
+            Dashboard
+          </Link>
         </div>
       </nav>
 
@@ -46,17 +34,10 @@ export default async function Home() {
             Discover, create, and share your favorite playlists with HP Music Player. 
             Stream millions of songs and create the perfect soundtrack for your life.
           </p>
-          {!isSignedIn ? (
-            <Link href="/sign-up" className="bg-purple-600 hover:bg-purple-700 text-white px-8 py-4 rounded-lg text-lg font-semibold transition-colors inline-flex items-center space-x-2">
-              <Play className="h-5 w-5" />
-              <span>Get Started Free</span>
-            </Link>
-          ) : (
-            <Link href="/dashboard" className="bg-purple-600 hover:bg-purple-700 text-white px-8 py-4 rounded-lg text-lg font-semibold transition-colors inline-flex items-center space-x-2">
-              <Play className="h-5 w-5" />
-              <span>Go to Dashboard</span>
-            </Link>
-          )}
+          <Link href="/sign-up" className="bg-purple-600 hover:bg-purple-700 text-white px-8 py-4 rounded-lg text-lg font-semibold transition-colors inline-flex items-center space-x-2">
+            <Play className="h-5 w-5" />
+            <span>Get Started Free</span>
+          </Link>
         </div>
 
         {/* Features */}
